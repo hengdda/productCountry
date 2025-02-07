@@ -14,6 +14,11 @@
 		4EA8FBB52D55631100F06DBD /* productCountryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBB42D55631100F06DBD /* productCountryTests.swift */; };
 		4EA8FBBF2D55631100F06DBD /* productCountryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBBE2D55631100F06DBD /* productCountryUITests.swift */; };
 		4EA8FBC12D55631100F06DBD /* productCountryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBC02D55631100F06DBD /* productCountryUITestsLaunchTests.swift */; };
+		4EA8FBD22D55652E00F06DBD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD12D55652E00F06DBD /* SettingsView.swift */; };
+		4EA8FBD42D5565F600F06DBD /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD32D5565F600F06DBD /* ProductListView.swift */; };
+		4EA8FBD62D55661A00F06DBD /* CameraScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD52D55661A00F06DBD /* CameraScanView.swift */; };
+		4EA8FBD82D55698000F06DBD /* AnimatedScanPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD72D55698000F06DBD /* AnimatedScanPage.swift */; };
+		4EA8FBDA2D556B4C00F06DBD /* bcode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD92D556B4C00F06DBD /* bcode.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,11 @@
 		4EA8FBBA2D55631100F06DBD /* productCountryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = productCountryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA8FBBE2D55631100F06DBD /* productCountryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productCountryUITests.swift; sourceTree = "<group>"; };
 		4EA8FBC02D55631100F06DBD /* productCountryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productCountryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4EA8FBD12D55652E00F06DBD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4EA8FBD32D5565F600F06DBD /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
+		4EA8FBD52D55661A00F06DBD /* CameraScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraScanView.swift; path = ../../../CameraScanView.swift; sourceTree = "<group>"; };
+		4EA8FBD72D55698000F06DBD /* AnimatedScanPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimatedScanPage.swift; path = ../../../AnimatedScanPage.swift; sourceTree = "<group>"; };
+		4EA8FBD92D556B4C00F06DBD /* bcode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bcode.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +84,8 @@
 		4EA8FB972D55630E00F06DBD = {
 			isa = PBXGroup;
 			children = (
+				4EA8FBD72D55698000F06DBD /* AnimatedScanPage.swift */,
+				4EA8FBD52D55661A00F06DBD /* CameraScanView.swift */,
 				4EA8FBA22D55630E00F06DBD /* productCountry */,
 				4EA8FBB32D55631100F06DBD /* productCountryTests */,
 				4EA8FBBD2D55631100F06DBD /* productCountryUITests */,
@@ -97,7 +109,10 @@
 				4EA8FBA32D55630E00F06DBD /* productCountryApp.swift */,
 				4EA8FBA52D55630E00F06DBD /* ContentView.swift */,
 				4EA8FBA72D55631100F06DBD /* Assets.xcassets */,
+				4EA8FBD92D556B4C00F06DBD /* bcode.jpg */,
 				4EA8FBA92D55631100F06DBD /* Preview Content */,
+				4EA8FBD12D55652E00F06DBD /* SettingsView.swift */,
+				4EA8FBD32D5565F600F06DBD /* ProductListView.swift */,
 			);
 			path = productCountry;
 			sourceTree = "<group>";
@@ -231,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA8FBDA2D556B4C00F06DBD /* bcode.jpg in Resources */,
 				4EA8FBAB2D55631100F06DBD /* Preview Assets.xcassets in Resources */,
 				4EA8FBA82D55631100F06DBD /* Assets.xcassets in Resources */,
 			);
@@ -257,7 +273,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA8FBD42D5565F600F06DBD /* ProductListView.swift in Sources */,
+				4EA8FBD22D55652E00F06DBD /* SettingsView.swift in Sources */,
+				4EA8FBD82D55698000F06DBD /* AnimatedScanPage.swift in Sources */,
 				4EA8FBA62D55630E00F06DBD /* ContentView.swift in Sources */,
+				4EA8FBD62D55661A00F06DBD /* CameraScanView.swift in Sources */,
 				4EA8FBA42D55630E00F06DBD /* productCountryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,8 +442,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"productCountry/Preview Content\"";
+				DEVELOPMENT_TEAM = 2LC5A9TA83;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -450,8 +472,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"productCountry/Preview Content\"";
+				DEVELOPMENT_TEAM = 2LC5A9TA83;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

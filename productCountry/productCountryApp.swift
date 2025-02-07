@@ -11,7 +11,8 @@ import SwiftUI
 struct productCountryApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AnimatedScanPage()
+            //ContentView()
         }
     }
 }

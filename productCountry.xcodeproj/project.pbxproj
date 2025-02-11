@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4E78E7162D568A3700A844BD /* QRResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78E7152D568A3700A844BD /* QRResultView.swift */; };
+		4E78E7182D579DEC00A844BD /* CameraScanGemini.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */; };
+		4E80C7D02D58E9AF00B2E35C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */; };
+		4E80C7D22D58EFE200B2E35C /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E80C7D12D58EFE200B2E35C /* CameraPreviewView.swift */; };
+		4E80C7D42D58FED800B2E35C /* TextScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E80C7D32D58FED800B2E35C /* TextScannerView.swift */; };
 		4EA8FBA42D55630E00F06DBD /* productCountryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBA32D55630E00F06DBD /* productCountryApp.swift */; };
 		4EA8FBA62D55630E00F06DBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBA52D55630E00F06DBD /* ContentView.swift */; };
 		4EA8FBA82D55631100F06DBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EA8FBA72D55631100F06DBD /* Assets.xcassets */; };
@@ -20,6 +24,11 @@
 		4EA8FBD62D55661A00F06DBD /* CameraScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD52D55661A00F06DBD /* CameraScanView.swift */; };
 		4EA8FBD82D55698000F06DBD /* AnimatedScanPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD72D55698000F06DBD /* AnimatedScanPage.swift */; };
 		4EA8FBDA2D556B4C00F06DBD /* bcode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD92D556B4C00F06DBD /* bcode.jpg */; };
+		4EBE184C2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */; };
+		4EBE184E2D5A53930050E926 /* bktextScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE184D2D5A53930050E926 /* bktextScannerView.swift */; };
+		4EBE18532D5A8AD00050E926 /* InterstitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE18522D5A8AD00050E926 /* InterstitialViewModel.swift */; };
+		4EBE18552D5AA60F0050E926 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 4EBE18542D5AA60F0050E926 /* GoogleGenerativeAI */; };
+		4EBE18572D5AA67D0050E926 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 4EBE18562D5AA67D0050E926 /* GoogleGenerativeAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +50,10 @@
 
 /* Begin PBXFileReference section */
 		4E78E7152D568A3700A844BD /* QRResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRResultView.swift; path = ../../../QRResultView.swift; sourceTree = "<group>"; };
+		4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraScanGemini.swift; path = ../../../CameraScanGemini.swift; sourceTree = "<group>"; };
+		4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraView.swift; path = ../../../CameraView.swift; sourceTree = "<group>"; };
+		4E80C7D12D58EFE200B2E35C /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraPreviewView.swift; path = ../../../CameraPreviewView.swift; sourceTree = "<group>"; };
+		4E80C7D32D58FED800B2E35C /* TextScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextScannerView.swift; path = ../../../TextScannerView.swift; sourceTree = "<group>"; };
 		4EA8FBA02D55630E00F06DBD /* productCountry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = productCountry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA8FBA32D55630E00F06DBD /* productCountryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productCountryApp.swift; sourceTree = "<group>"; };
 		4EA8FBA52D55630E00F06DBD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +69,9 @@
 		4EA8FBD52D55661A00F06DBD /* CameraScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraScanView.swift; path = ../../../CameraScanView.swift; sourceTree = "<group>"; };
 		4EA8FBD72D55698000F06DBD /* AnimatedScanPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimatedScanPage.swift; path = ../../../AnimatedScanPage.swift; sourceTree = "<group>"; };
 		4EA8FBD92D556B4C00F06DBD /* bcode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bcode.jpg; sourceTree = "<group>"; };
+		4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = bkupcamerapreviewvIE.swift; path = ../../../bkupcamerapreviewvIE.swift; sourceTree = "<group>"; };
+		4EBE184D2D5A53930050E926 /* bktextScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = bktextScannerView.swift; path = ../../../bktextScannerView.swift; sourceTree = "<group>"; };
+		4EBE18522D5A8AD00050E926 /* InterstitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InterstitialViewModel.swift; path = ../../../InterstitialViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EBE18572D5AA67D0050E926 /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EBE18552D5AA60F0050E926 /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +104,13 @@
 		4EA8FB972D55630E00F06DBD = {
 			isa = PBXGroup;
 			children = (
+				4EBE18522D5A8AD00050E926 /* InterstitialViewModel.swift */,
+				4EBE184D2D5A53930050E926 /* bktextScannerView.swift */,
+				4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */,
+				4E80C7D32D58FED800B2E35C /* TextScannerView.swift */,
+				4E80C7D12D58EFE200B2E35C /* CameraPreviewView.swift */,
+				4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */,
+				4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */,
 				4E78E7152D568A3700A844BD /* QRResultView.swift */,
 				4EA8FBD72D55698000F06DBD /* AnimatedScanPage.swift */,
 				4EA8FBD52D55661A00F06DBD /* CameraScanView.swift */,
@@ -161,6 +186,9 @@
 			dependencies = (
 			);
 			name = productCountry;
+			packageProductDependencies = (
+				4EBE18562D5AA67D0050E926 /* GoogleGenerativeAI */,
+			);
 			productName = productCountry;
 			productReference = 4EA8FBA02D55630E00F06DBD /* productCountry.app */;
 			productType = "com.apple.product-type.application";
@@ -179,6 +207,9 @@
 				4EA8FBB22D55631100F06DBD /* PBXTargetDependency */,
 			);
 			name = productCountryTests;
+			packageProductDependencies = (
+				4EBE18542D5AA60F0050E926 /* GoogleGenerativeAI */,
+			);
 			productName = productCountryTests;
 			productReference = 4EA8FBB02D55631100F06DBD /* productCountryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -233,6 +264,9 @@
 				Base,
 			);
 			mainGroup = 4EA8FB972D55630E00F06DBD;
+			packageReferences = (
+				4E78E7192D57A48900A844BD /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
+			);
 			productRefGroup = 4EA8FBA12D55630E00F06DBD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -276,13 +310,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E78E7182D579DEC00A844BD /* CameraScanGemini.swift in Sources */,
 				4EA8FBD42D5565F600F06DBD /* ProductListView.swift in Sources */,
+				4E80C7D22D58EFE200B2E35C /* CameraPreviewView.swift in Sources */,
 				4EA8FBD22D55652E00F06DBD /* SettingsView.swift in Sources */,
+				4E80C7D02D58E9AF00B2E35C /* CameraView.swift in Sources */,
 				4EA8FBD82D55698000F06DBD /* AnimatedScanPage.swift in Sources */,
 				4EA8FBA62D55630E00F06DBD /* ContentView.swift in Sources */,
 				4EA8FBD62D55661A00F06DBD /* CameraScanView.swift in Sources */,
+				4EBE184E2D5A53930050E926 /* bktextScannerView.swift in Sources */,
 				4EA8FBA42D55630E00F06DBD /* productCountryApp.swift in Sources */,
+				4EBE18532D5A8AD00050E926 /* InterstitialViewModel.swift in Sources */,
 				4E78E7162D568A3700A844BD /* QRResultView.swift in Sources */,
+				4EBE184C2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift in Sources */,
+				4E80C7D42D58FED800B2E35C /* TextScannerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +659,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4E78E7192D57A48900A844BD /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4EBE18542D5AA60F0050E926 /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E78E7192D57A48900A844BD /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
+		4EBE18562D5AA67D0050E926 /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E78E7192D57A48900A844BD /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4EA8FB982D55630E00F06DBD /* Project object */;
 }

@@ -324,7 +324,6 @@
 			mainGroup = 4EA8FB972D55630E00F06DBD;
 			packageReferences = (
 				4E78E7192D57A48900A844BD /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
-				4E810A0F2D5AE009001A7191 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 4EA8FBA12D55630E00F06DBD /* Products */;
 			projectDirPath = "";
@@ -808,14 +807,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.5.6;
-			};
-		};
-		4E810A0F2D5AE009001A7191 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 12.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

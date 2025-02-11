@@ -14,12 +14,14 @@ struct productCountryApp: App {
     // you must create an application delegate and attach it to your `App` struct
     // using `UIApplicationDelegateAdaptor`.
     // Register AppDelegate for Firebase setup
-   
+
+    
     var body: some Scene {
+        
         WindowGroup {
-            //AnimatedScanPage()
+            AnimatedScanPage()
             //ContentView()
-            CameraPreviewView()
+            //CameraPreviewView()
         }
     }
 }

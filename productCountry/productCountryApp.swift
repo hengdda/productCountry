@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
-
+import GoogleMobileAds
+import AppTrackingTransparency
+import UIKit
 
 @main
 struct productCountryApp: App {
@@ -14,8 +16,9 @@ struct productCountryApp: App {
     // you must create an application delegate and attach it to your `App` struct
     // using `UIApplicationDelegateAdaptor`.
     // Register AppDelegate for Firebase setup
-
-    
+    init() {
+        MobileAds.shared.start(completionHandler: nil)
+       }
     var body: some Scene {
         
         WindowGroup {

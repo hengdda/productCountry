@@ -1,6 +1,0 @@
-framework module Pods_productCountry_productCountryUITests {
-  umbrella header "Pods-productCountry-productCountryUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

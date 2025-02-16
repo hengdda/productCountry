@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E29BC672D60E70800532510 /* newTextScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BC662D60E6FF00532510 /* newTextScan.swift */; };
+		4E29BC6B2D62A4E400532510 /* Untitled 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BC6A2D62A49B00532510 /* Untitled 2.swift */; };
 		4E78E7162D568A3700A844BD /* QRResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78E7152D568A3700A844BD /* QRResultView.swift */; };
 		4E78E7182D579DEC00A844BD /* CameraScanGemini.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */; };
 		4E80C7D02D58E9AF00B2E35C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */; };
@@ -393,6 +394,7 @@
 				4EBE184E2D5A53930050E926 /* bktextScannerView.swift in Sources */,
 				4EA8FBA42D55630E00F06DBD /* productCountryApp.swift in Sources */,
 				4EBE18532D5A8AD00050E926 /* InterstitialViewModel.swift in Sources */,
+				4E29BC6B2D62A4E400532510 /* Untitled 2.swift in Sources */,
 				4E78E7162D568A3700A844BD /* QRResultView.swift in Sources */,
 				4EBE184C2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift in Sources */,
 				4E80C7D42D58FED800B2E35C /* TextScannerView.swift in Sources */,

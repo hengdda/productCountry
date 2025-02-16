@@ -31,7 +31,6 @@
 		4EA8FBDA2D556B4C00F06DBD /* bcode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD92D556B4C00F06DBD /* bcode.jpg */; };
 		4EBE184C2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */; };
 		4EBE184E2D5A53930050E926 /* bktextScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE184D2D5A53930050E926 /* bktextScannerView.swift */; };
-		4EBE18532D5A8AD00050E926 /* InterstitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE18522D5A8AD00050E926 /* InterstitialViewModel.swift */; };
 		4EBE18552D5AA60F0050E926 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 4EBE18542D5AA60F0050E926 /* GoogleGenerativeAI */; };
 		4EBE18572D5AA67D0050E926 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 4EBE18562D5AA67D0050E926 /* GoogleGenerativeAI */; };
 /* End PBXBuildFile section */
@@ -105,7 +104,6 @@
 		4EA8FBD92D556B4C00F06DBD /* bcode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bcode.jpg; sourceTree = "<group>"; };
 		4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = bkupcamerapreviewvIE.swift; path = ../../../bkupcamerapreviewvIE.swift; sourceTree = "<group>"; };
 		4EBE184D2D5A53930050E926 /* bktextScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = bktextScannerView.swift; path = ../../../bktextScannerView.swift; sourceTree = "<group>"; };
-		4EBE18522D5A8AD00050E926 /* InterstitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InterstitialViewModel.swift; path = ../../../InterstitialViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +160,6 @@
 				4E29BC662D60E6FF00532510 /* newTextScan.swift */,
 				4EA1B9BD2D5BA2490072166F /* AboutView.swift */,
 				4E810A122D5B95D7001A7191 /* BannerAdView.swift */,
-				4EBE18522D5A8AD00050E926 /* InterstitialViewModel.swift */,
 				4EBE184D2D5A53930050E926 /* bktextScannerView.swift */,
 				4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */,
 				4E80C7D32D58FED800B2E35C /* TextScannerView.swift */,
@@ -393,7 +390,6 @@
 				4EA8FBD62D55661A00F06DBD /* CameraScanView.swift in Sources */,
 				4EBE184E2D5A53930050E926 /* bktextScannerView.swift in Sources */,
 				4EA8FBA42D55630E00F06DBD /* productCountryApp.swift in Sources */,
-				4EBE18532D5A8AD00050E926 /* InterstitialViewModel.swift in Sources */,
 				4E29BC6B2D62A4E400532510 /* Untitled 2.swift in Sources */,
 				4E78E7162D568A3700A844BD /* QRResultView.swift in Sources */,
 				4EBE184C2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift in Sources */,

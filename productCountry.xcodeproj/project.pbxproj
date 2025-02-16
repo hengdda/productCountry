@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E29BC672D60E70800532510 /* newTextScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BC662D60E6FF00532510 /* newTextScan.swift */; };
 		4E78E7162D568A3700A844BD /* QRResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78E7152D568A3700A844BD /* QRResultView.swift */; };
 		4E78E7182D579DEC00A844BD /* CameraScanGemini.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */; };
 		4E80C7D02D58E9AF00B2E35C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */; };
@@ -65,6 +66,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E29BC662D60E6FF00532510 /* newTextScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newTextScan.swift; sourceTree = "<group>"; };
+		4E29BC6A2D62A49B00532510 /* Untitled 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Untitled 2.swift"; sourceTree = "<group>"; };
 		4E78E7152D568A3700A844BD /* QRResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRResultView.swift; path = ../../../QRResultView.swift; sourceTree = "<group>"; };
 		4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraScanGemini.swift; path = ../../../CameraScanGemini.swift; sourceTree = "<group>"; };
 		4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraView.swift; path = ../../../CameraView.swift; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 		4EA8FB972D55630E00F06DBD = {
 			isa = PBXGroup;
 			children = (
+				4E29BC6A2D62A49B00532510 /* Untitled 2.swift */,
+				4E29BC662D60E6FF00532510 /* newTextScan.swift */,
 				4EA1B9BD2D5BA2490072166F /* AboutView.swift */,
 				4E810A122D5B95D7001A7191 /* BannerAdView.swift */,
 				4EBE18522D5A8AD00050E926 /* InterstitialViewModel.swift */,
@@ -329,7 +334,7 @@
 			mainGroup = 4EA8FB972D55630E00F06DBD;
 			packageReferences = (
 				4E78E7192D57A48900A844BD /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
-				4E94EAFB2D5C105600686722 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */,
+				4E94EAFB2D5C105600686722 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 4EA8FBA12D55630E00F06DBD /* Products */;
 			projectDirPath = "";
@@ -377,6 +382,7 @@
 				4EA1B9BE2D5BA2490072166F /* AboutView.swift in Sources */,
 				4E78E7182D579DEC00A844BD /* CameraScanGemini.swift in Sources */,
 				4EA8FBD42D5565F600F06DBD /* ProductListView.swift in Sources */,
+				4E29BC672D60E70800532510 /* newTextScan.swift in Sources */,
 				4E80C7D22D58EFE200B2E35C /* CameraPreviewView.swift in Sources */,
 				4EA8FBD22D55652E00F06DBD /* SettingsView.swift in Sources */,
 				4E80C7D02D58E9AF00B2E35C /* CameraView.swift in Sources */,
@@ -551,16 +557,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"productCountry/Preview Content\"";
 				DEVELOPMENT_TEAM = 2LC5A9TA83;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BuyCanadianProducts;
+				INFOPLIST_KEY_CFBundleDisplayName = ShopCAN;
 				INFOPLIST_KEY_LSApplicationCategoryType = NSCameraUsageDescription;
-				INFOPLIST_KEY_NSCameraUsageDescription = NSCameraUsageDescription;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan product information and provide details about the product’s country of origin.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -573,7 +579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.aurora.productCountry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -593,15 +599,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"productCountry/Preview Content\"";
 				DEVELOPMENT_TEAM = 2LC5A9TA83;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BuyCanadianProducts;
+				INFOPLIST_KEY_CFBundleDisplayName = ShopCAN;
 				INFOPLIST_KEY_LSApplicationCategoryType = NSCameraUsageDescription;
-				INFOPLIST_KEY_NSCameraUsageDescription = NSCameraUsageDescription;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan product information and provide details about the product’s country of origin.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -614,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.aurora.productCountry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -750,7 +756,7 @@
 				minimumVersion = 0.5.6;
 			};
 		};
-		4E94EAFB2D5C105600686722 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */ = {
+		4E94EAFB2D5C105600686722 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
@@ -763,7 +769,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		4E94EAFC2D5C105600686722 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E94EAFB2D5C105600686722 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */;
+			package = 4E94EAFB2D5C105600686722 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
 		};
 		4EBE18542D5AA60F0050E926 /* GoogleGenerativeAI */ = {

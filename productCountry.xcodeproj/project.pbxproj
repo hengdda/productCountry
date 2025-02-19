@@ -18,7 +18,7 @@
 		4E29BCA32D662B7000532510 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BCA22D662B7000532510 /* CameraPreviewView.swift */; };
 		4E29BCA52D662C0500532510 /* CameraScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BCA42D662C0500532510 /* CameraScanView.swift */; };
 		4E29BCA72D662C4100532510 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BCA62D662C4100532510 /* CameraView.swift */; };
-		4E78E7182D579DEC00A844BD /* CameraScanGemini.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */; };
+		4E29BCA92D662D4400532510 /* CameraScanGemini.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BCA82D662D4400532510 /* CameraScanGemini.swift */; };
 		4E94EAFD2D5C105600686722 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4E94EAFC2D5C105600686722 /* GoogleMobileAds */; };
 		4EA8FBA42D55630E00F06DBD /* productCountryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBA32D55630E00F06DBD /* productCountryApp.swift */; };
 		4EA8FBA62D55630E00F06DBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBA52D55630E00F06DBD /* ContentView.swift */; };
@@ -76,7 +76,7 @@
 		4E29BCA22D662B7000532510 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 		4E29BCA42D662C0500532510 /* CameraScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraScanView.swift; sourceTree = "<group>"; };
 		4E29BCA62D662C4100532510 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraScanGemini.swift; path = ../../../CameraScanGemini.swift; sourceTree = "<group>"; };
+		4E29BCA82D662D4400532510 /* CameraScanGemini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraScanGemini.swift; sourceTree = "<group>"; };
 		4E810A142D5B97A1001A7191 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4E810A162D5B97AE001A7191 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		4E810A182D5B97BD001A7191 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
@@ -160,10 +160,10 @@
 				4E29BC9A2D662A4300532510 /* bktextScannerView.swift */,
 				4E29BC6E2D63B10800532510 /* TextScannerViewByClaude.swift */,
 				4E29BCA42D662C0500532510 /* CameraScanView.swift */,
-				4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */,
 				4E29BC9E2D662AE100532510 /* AnimatedScanPage.swift */,
 				4E29BC9C2D662A9600532510 /* TextScannerView.swift */,
 				4E29BCA22D662B7000532510 /* CameraPreviewView.swift */,
+				4E29BCA82D662D4400532510 /* CameraScanGemini.swift */,
 				4E29BCA02D662B3100532510 /* QRResultView.swift */,
 				4E29BCA62D662C4100532510 /* CameraView.swift */,
 				4EA8FBA22D55630E00F06DBD /* productCountry */,
@@ -374,7 +374,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E78E7182D579DEC00A844BD /* CameraScanGemini.swift in Sources */,
 				4E29BC9B2D662A4300532510 /* bktextScannerView.swift in Sources */,
 				4EA8FBD42D5565F600F06DBD /* ProductListView.swift in Sources */,
 				4E29BC672D60E70800532510 /* newTextScan.swift in Sources */,
@@ -385,6 +384,7 @@
 				4E29BC9F2D662AE100532510 /* AnimatedScanPage.swift in Sources */,
 				4E29BC6F2D63B10800532510 /* TextScannerViewByClaude.swift in Sources */,
 				4EA8FBA62D55630E00F06DBD /* ContentView.swift in Sources */,
+				4E29BCA92D662D4400532510 /* CameraScanGemini.swift in Sources */,
 				4EA8FBA42D55630E00F06DBD /* productCountryApp.swift in Sources */,
 				4E29BCA12D662B3100532510 /* QRResultView.swift in Sources */,
 				4E29BCA52D662C0500532510 /* CameraScanView.swift in Sources */,

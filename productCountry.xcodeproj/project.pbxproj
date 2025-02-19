@@ -16,6 +16,7 @@
 		4E29BC9F2D662AE100532510 /* AnimatedScanPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BC9E2D662AE100532510 /* AnimatedScanPage.swift */; };
 		4E29BCA12D662B3100532510 /* QRResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BCA02D662B3100532510 /* QRResultView.swift */; };
 		4E29BCA32D662B7000532510 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BCA22D662B7000532510 /* CameraPreviewView.swift */; };
+		4E29BCA52D662C0500532510 /* CameraScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29BCA42D662C0500532510 /* CameraScanView.swift */; };
 		4E78E7182D579DEC00A844BD /* CameraScanGemini.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */; };
 		4E80C7D02D58E9AF00B2E35C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */; };
 		4E94EAFD2D5C105600686722 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4E94EAFC2D5C105600686722 /* GoogleMobileAds */; };
@@ -30,7 +31,6 @@
 		4EA8FBD42D5565F600F06DBD /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD32D5565F600F06DBD /* ProductListView.swift */; };
 		4EA8FBD62D55661A00F06DBD /* CameraScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD52D55661A00F06DBD /* CameraScanView.swift */; };
 		4EA8FBDA2D556B4C00F06DBD /* bcode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EA8FBD92D556B4C00F06DBD /* bcode.jpg */; };
-		4EBE184C2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */; };
 		4EBE18552D5AA60F0050E926 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 4EBE18542D5AA60F0050E926 /* GoogleGenerativeAI */; };
 		4EBE18572D5AA67D0050E926 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 4EBE18562D5AA67D0050E926 /* GoogleGenerativeAI */; };
 /* End PBXBuildFile section */
@@ -75,6 +75,7 @@
 		4E29BC9E2D662AE100532510 /* AnimatedScanPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedScanPage.swift; sourceTree = "<group>"; };
 		4E29BCA02D662B3100532510 /* QRResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRResultView.swift; sourceTree = "<group>"; };
 		4E29BCA22D662B7000532510 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
+		4E29BCA42D662C0500532510 /* CameraScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraScanView.swift; sourceTree = "<group>"; };
 		4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraScanGemini.swift; path = ../../../CameraScanGemini.swift; sourceTree = "<group>"; };
 		4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraView.swift; path = ../../../CameraView.swift; sourceTree = "<group>"; };
 		4E810A142D5B97A1001A7191 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -103,7 +104,6 @@
 		4EA8FBD32D5565F600F06DBD /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		4EA8FBD52D55661A00F06DBD /* CameraScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraScanView.swift; path = ../../../CameraScanView.swift; sourceTree = "<group>"; };
 		4EA8FBD92D556B4C00F06DBD /* bcode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bcode.jpg; sourceTree = "<group>"; };
-		4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = bkupcamerapreviewvIE.swift; path = ../../../bkupcamerapreviewvIE.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,10 +159,10 @@
 				4E29BC662D60E6FF00532510 /* newTextScan.swift */,
 				4E29BC962D6628D100532510 /* BannerAdView.swift */,
 				4E29BC982D6629B800532510 /* AboutView.swift */,
-				4EBE184B2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift */,
 				4E29BC9A2D662A4300532510 /* bktextScannerView.swift */,
 				4E29BC6E2D63B10800532510 /* TextScannerViewByClaude.swift */,
 				4E80C7CF2D58E9AF00B2E35C /* CameraView.swift */,
+				4E29BCA42D662C0500532510 /* CameraScanView.swift */,
 				4E78E7172D579DEC00A844BD /* CameraScanGemini.swift */,
 				4E29BC9E2D662AE100532510 /* AnimatedScanPage.swift */,
 				4E29BC9C2D662A9600532510 /* TextScannerView.swift */,
@@ -391,9 +391,9 @@
 				4EA8FBD62D55661A00F06DBD /* CameraScanView.swift in Sources */,
 				4EA8FBA42D55630E00F06DBD /* productCountryApp.swift in Sources */,
 				4E29BCA12D662B3100532510 /* QRResultView.swift in Sources */,
+				4E29BCA52D662C0500532510 /* CameraScanView.swift in Sources */,
 				4E29BC992D6629B800532510 /* AboutView.swift in Sources */,
 				4E29BCA32D662B7000532510 /* CameraPreviewView.swift in Sources */,
-				4EBE184C2D5A4BB20050E926 /* bkupcamerapreviewvIE.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

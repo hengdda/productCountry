@@ -5,316 +5,613 @@
 //  Created by Mac22N on 2025-02-15.
 //
 /*
-import SwiftUI
-import Vision
-import VisionKit
-import UIKit
-import WebKit
-import Foundation
+ import SwiftUI
+ import Vision
+ import VisionKit
+ import GoogleGenerativeAI
+ import UIKit
+ import GoogleMobileAds
 
-struct TextScannerView: View {
-    let image: UIImage?
-    @State private var quickVerdict: String = "Checking..."
-    @State private var product: String = "Unknown"
-    @State private var confidence: String = "0%" // Initialize with a default value
-    @State private var detailedBreakdown: [ProductInfo] = []
-    @State private var parentCompany: [ParentCompany] = []
-    @State private var resume: String = "Fetching..."
-    @State private var companyHistory: String = "Fetching..."
-    // Declare extractedText as a State *before* using it:
-   @State private var extractedText: String = "Scanning..." // Initialize it!
-   @State private var brandName: String = "Unknown" // Declare and initialize brandName
-    @State private var productName: String = "Unknown" // Declare and initialize productName
-    
-    // Declare and initialize the missing state variables:
-        @State private var isCanadianBrand: String = "Checking..."
-        @State private var isProductMadeInCanada: String = "Checking..."
-        @State private var ingredientOrigins: String = "Checking..."
-        @State private var brandHistory: String = "Fetching..." // Consistent with other history states
-    @Environment(\.presentationMode) var presentationMode
+ struct TextScannerView: View {
+     let image: UIImage
+     @State private var extractedText: String = "Scanning..."
+     @State private var aiResponse: String = "Please press Analyze button..."
+     @State private var storedAIResponse: AIAnalysisResponse? // ✅ Stores AI JSON response
+     let model = GenerativeModel(name: "gemini-pro", apiKey: "AIzaSyAW_ZQrncB-iITVLJCgUTEFf7s1dBav4H4")// ✅ Replace with your actual API key
+     @Environment(\.presentationMode) var presentationMode
 
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                // Quick Verdict
-                Text("Quick Verdict:")
-                    .font(.title2.bold())
-                Text(quickVerdict)
-                    .foregroundColor(quickVerdict.contains("Canadian") ? .green : .red)
+     var body: some View {
+         VStack {
+             // Scanned Image with Rounded Bottom Corners
+             Image(uiImage: image)
+                 .resizable()
+                 .scaledToFill() // 🔥 Fills the width, may crop the image
+                 .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height * 0.25)
+                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                 .padding(.top, 10)
 
-                // Product Information
-                Text("Product: \(product)")
-                Text("Confidence in verdict: \(confidence)")
+             // 📜 Display Extracted Text
+                   Text(extractedText)
+                       .font(.body)
+                       .lineLimit(nil)
+                       .foregroundColor(.black)
+                       .padding()
+                       .frame(maxWidth: UIScreen.main.bounds.width * 0.9, maxHeight: UIScreen.main.bounds.height * 0.3 )
+                       .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
+                       .padding(.bottom, 10) // Add space before "Analysis"
+             // Analysis Section
+             VStack(alignment: .leading) {
+                 Text("Analysis")
+                     .font(.title3).bold()
+                     .padding(.horizontal)
+                 
+                 ScrollView {
+                     VStack{
+                         if let aiData = storedAIResponse {
+                             AIAnalysisView(aiData: aiData)
+                         } else {
+                             Text(aiResponse)
+                                 .font(.body)
+                                 .padding()
+                         }
+                     }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                 }
+                 .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.6)
+                 .background(RoundedRectangle(cornerRadius: 20).fill(Color.gray.opacity(0.2))) // ✅ Background with rounded corners
+                 .padding(.horizontal)
+             }
+             Spacer()
+             HStack{
+                 // Back Button
+                 Button(action: {
+                         // Action to go back (Dismiss view or pop navigation)
+                         presentationMode.wrappedValue.dismiss()
+                     }) {
+                         Image(systemName: "arrow.left") // Back arrow icon
+                             .font(.title2)
+                             .foregroundColor(.white)
+                             .padding()
+                             .background(
+                                 Circle()
+                                     .fill(Color.gray.opacity(0.8))
+                                     .shadow(radius: 3)
+                             )
+                     }
+             // Analyze Button
+             Button(action: {
+                 //fetchAIAnalysis(for: extractedText)
+                 fetchAIAnalysis(for: "DJI Neo")
+             }) {
+                 Text("Analyze")
+                     .font(.title2)
+                     .foregroundColor(.white)
+                     .padding()
+                     .frame(maxWidth: .infinity)
+                     .background(Color.red)
+                     .cornerRadius(10)
+             }
+             .padding(.horizontal)
+             // end of HSTACK
+         }
+             Spacer()
+         }
+         .onAppear { extractText(from: image) }
+         .navigationBarHidden(true)
+     }
 
-                // Detailed Breakdown
-                Text("Detailed Breakdown:")
-                    .font(.title3.bold())
-                ForEach(detailedBreakdown) { info in
-                    HStack {
-                        Text(info.category + ":").bold()
-                        Spacer()
-                        Text(info.answer)
-                    }
-                }
+     private func extractText(from image: UIImage) {
+         guard let cgImage = image.cgImage else { return }
 
-                // Resume
-                Text("Resume:")
-                    .font(.title3.bold())
-                Text(resume)
+         let request = VNRecognizeTextRequest { request, error in
+             if let error = error {
+                 print("Text recognition error: \(error)")
+                 return
+             }
 
-                // Parent Company
-                Text("Parent Company:")
-                    .font(.title3.bold())
-                ForEach(parentCompany) { company in
-                    HStack {
-                        Text(company.category + ":").bold()
-                        Spacer()
-                        Text(company.name)
-                        Text(company.country)
-                    }
-                }
+             let recognizedStrings = request.results?
+                 .compactMap { $0 as? VNRecognizedTextObservation }
+                 .compactMap { $0.topCandidates(1).first?.string }
+                 .joined(separator: "\n")
 
-                // Company History
-                Text("Company History")
-                    .font(.title3.bold())
-                Text(companyHistory)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom)
+             DispatchQueue.main.async {
+                 self.extractedText = recognizedStrings ?? "No text detected"
+             }
+         }
 
-                // Start Over Button
-                Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                    Text("Start Over")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-            }
-            .onAppear {
-                DispatchQueue.main.async {
-                    extractText(from: image)
-                }
-            }
-        }
-    }
+         request.recognitionLevel = .accurate
+         request.usesLanguageCorrection = true
 
-    // Function to Extract Text from Image
-    private func extractText(from image: UIImage?) {
-        guard let cgImage = image?.cgImage else { return }
+         let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
 
-        let request = VNRecognizeTextRequest { request, error in
-            if let error = error {
-                print("Text recognition error: \(error)")
-                return
-            }
+         DispatchQueue.global(qos: .userInitiated).async {
+             do {
+                 try requestHandler.perform([request])
+             } catch {
+                 print("Failed to perform text recognition: \(error)")
+             }
+         }
+     }
 
-            let recognizedStrings = request.results?
-                .compactMap { $0 as? VNRecognizedTextObservation }
-                .compactMap { $0.topCandidates(1).first?.string }
-                .joined(separator: "\n")
+    // private func fetchAIAnalysis(for text: String) {
+     private func fetchAIAnalysis(for text: String) {
+         Task {
+             do {
+                 let prompt = """
+                     Based on the Product Description to analyst below questions. Return the results in JSON format.
+                     Product Description:
+                     \(text)  // The text you scanned
+                     
+                     {
+                         "quickVerdict": "The percentage indicating how Canadian this product is...",
+                         "productSummary": "Brief description of the product",
+                         "parentCompany": { "name": "Company Name", "isCanadian": "Yes/No" },
+                         "canadianProbability": "Percentage value in string",
+                         "detailedBreakdown": {
+                             "ingredients": { "isCanadian": "Yes/No", "source": "Country of origin" },
+                             "manufacturing": { "isCanadian": "Yes/No", "location": "Where it's made" },
+                             "parentCompany": { "isCanadian": "Yes/No", "name": "Parent company" },
+                             "brand": { "isCanadian": "Yes/No", "name": "Brand name" },
+                             "countryContributions": { "CountryName": Percentage Value in the format of double },
+                             "supplyChainDetails": ["Description1", "Description2"],
+                             "alternativeCompanies": [
+                                 {
+                                     "name": "Name of an alternative company.",
+                                     "website": "Website URL of the alternative company.",
+                                     "isCanadian": "Yes/No/Unknown",
+                                     "country": "Country where the alternative company is based."
+                                 }
+                             ]
+                     
+                         }
+                     }
+                     Text: \(text)
+                     """
 
-            DispatchQueue.main.async {
-                self.extractedText = recognizedStrings ?? "No text detected"
-                extractBrandAndProduct()
-            }
-        }
+                 let response = try await model.generateContent(prompt)
 
-        request.recognitionLevel = .accurate
-        request.usesLanguageCorrection = true
+                 if let rawText = response.text {
+                     print("🔍 Raw AI Response: \n\(rawText)")
 
-        let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+                     // Directly decode the rawText (no extractJSON needed)
+                     if let jsonData = rawText.data(using: .utf8) {
+                         let decoder = JSONDecoder()
+                         decoder.keyDecodingStrategy = .convertFromSnakeCase // Important!
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                try requestHandler.perform([request])
-            } catch {
-                print("Failed to perform text recognition: \(error)")
-            }
-        }
-    }
+                         do {
+                             let decodedResponse = try decoder.decode(AIAnalysisResponse.self, from: jsonData)
+                             storedAIResponse = decodedResponse
+                             print("🎉 JSON decoded successfully!")
+                         } catch let decodingError {
+                             print("🚨 JSON Decoding Error: \(decodingError)")
+                             // ... (Detailed error printing as before)
+                             aiResponse = "Error: Could not parse JSON. Check the console for details."
+                         }
+                     } else {
+                         print("🚨 Error: Could not convert JSON string to data.")
+                         aiResponse = "Error: Invalid JSON data."
+                     }
+                 } else {
+                     print("🚨 Error: AI response is empty.")
+                     aiResponse = "Error: No response from AI."
+                 }
+             }
+         }
+     }
+     func fetchFakeAIAnalysis(for text: String) {
+     Task {
+         do {
+             // Use the fake JSON for testing
+             /*let fakeJSON = #"""
+             {
+                 "quickVerdict": "The DJI Neo is not made in Canada.",
+                 "productSummary": "The DJI Neo is a drone manufactured by DJI, a Chinese company.",
+                 "parentCompany": { "name": "DJI", "isCanadian": "No" },
+                 "canadianProbability": "0%",
+                 "detailedBreakdown": {
+                     "ingredients": { "isCanadian": "No", "source": "China" },
+                     "manufacturing": { "isCanadian": "No", "location": "China" },
+                     "parentCompany": { "isCanadian": "No", "name": "DJI" },
+                     "brand": { "isCanadian": "No", "name": "DJI" },
+                     "countryContributions": { "China": 100.0 },  // ✅ Fix: Ensure it's a Double
+                     "supplyChainDetails": ["Components are sourced from China.", "Assembly takes place in China."]
+                 },
+                 "alternativeCompanies": []  // ✅ Fix: Ensure it's an empty array, not null
+             }*/
+             let fakeJSON = #"""
+                 {
+                                 "quickVerdict": "The DJI Neo is not made in Canada.",
+                                 "productSummary": "The DJI Neo is a drone manufactured by DJI, a Chinese company.",
+                                 "parentCompany": { "name": "DJI", "isCanadian": "No" },
+                                 "canadianProbability": "0%",
+                                 "detailedBreakdown": {
+                                     "ingredients": { "isCanadian": "No", "source": "China" },
+                                     "manufacturing": { "isCanadian": "No", "location": "China" },
+                                     "parentCompany": { "isCanadian": "No", "name": "DJI" },
+                                     "brand": { "isCanadian": "No", "name": "DJI" },
+                                     "countryContributions": { "China": 100 },
+                                     "supplyChainDetails": ["Components are sourced from China.", "Assembly takes place in China."]
+                                 }
+                             }
+             """#
 
-    // Function to Extract Brand & Product Name
-    private func extractBrandAndProduct() {
-            let brandPattern = #"Brand:\s*(.*?)\n"#
-            let productPattern = #"Product:\s*(.*?)\n"#
-            let confidencePattern = #"Confidence in verdict:\s*(.*?)\n"# // Capture confidence
 
-            let extractedBrand = extractValue(from: extractedText, for: brandPattern)
-            let extractedProduct = extractValue(from: extractedText, for: productPattern)
-            let extractedConfidence = extractValue(from: extractedText, for: confidencePattern)
+             // ✅ Step 1: Print raw JSON for debugging
+             print("🔍 Fake JSON being used: \n\(fakeJSON)")
 
-            brandName = extractedBrand
-            productName = extractedProduct
-            confidence = extractedConfidence
+             // ✅ Step 2: Convert JSON string to Data
+             guard let jsonData = fakeJSON.data(using: .utf8) else {
+                 print("🚨 Error: Could not convert JSON string to data.")
+                 aiResponse = "Error: Invalid JSON data."
+                 return
+             }
 
-            if brandName != "Unknown" && productName != "Unknown" && confidence != "0%" { // Check if all values are extracted
-                processExtractedInformation()
-            }
-        }
-    private func processExtractedInformation() {
-            // 1. Quick Verdict (Simplified):
-            quickVerdict = (extractedText.contains("Canadian")) ? "Canadian" : "Not Canadian"
+             // ✅ Step 3: Print raw JSON Data for debugging
+             print("📄 JSON Data: \(jsonData)")
 
-            // 2. Detailed Breakdown (Parsing):
-            let detailedBreakdownText = extractSection(from: extractedText, title: "Detailed Breakdown:")
-            detailedBreakdown = parseDetailedBreakdown(detailedBreakdownText)
+             // ✅ Step 4: Decode the JSON into AIAnalysisResponse
+             let decoder = JSONDecoder()
+             decoder.keyDecodingStrategy = .convertFromSnakeCase
+             let decodedResponse = try decoder.decode(AIAnalysisResponse.self, from: jsonData)
 
-            // 3. Resume (Direct Extraction):
-            resume = extractSection(from: extractedText, title: "Resume:")
+             // ✅ Step 5: Store the AI response
+             DispatchQueue.main.async {
+                 storedAIResponse = decodedResponse
+                 print("🎉 JSON decoded successfully!")
+             }
 
-            // 4. Parent Company (Parsing):
-            let parentCompanyText = extractSection(from: extractedText, title: "Parent Company:")
-            parentCompany = parseParentCompany(parentCompanyText)
+         } catch let decodingError {
+             print("🚨 JSON Decoding Error: \(decodingError)")
 
-            // 5. Company History (Direct Extraction):
-            companyHistory = extractSection(from: extractedText, title: "Company History")
-        }
-    private func parseDetailedBreakdown( _ text: String) -> [ProductInfo] {
-            var breakdown: [ProductInfo] = []
-            let lines = text.components(separatedBy: .newlines)
+             // ✅ Step 6: More specific error handling
+             if let errorContext = decodingError as? DecodingError {
+                 switch errorContext {
+                 case .typeMismatch(let type, let context):
+                     print("🚨 Type mismatch: Expected \(type), Context: \(context.debugDescription)")
+                 case .valueNotFound(let type, let context):
+                     print("🚨 Value not found: \(type), Context: \(context.debugDescription)")
+                 case .keyNotFound(let key, let context):
+                     print("🚨 Key not found: \(key), Context: \(context.debugDescription)")
+                 case .dataCorrupted(let context):
+                     print("🚨 Data corrupted: \(context.debugDescription)")
+                 @unknown default:
+                     print("🚨 Unknown decoding error.")
+                 }
+             }
 
-            for line in lines {
-                let components = line.components(separatedBy: ":")
-                if components.count == 2 {
-                    let category = components[0].trimmingCharacters(in: .whitespacesAndNewlines)
-                    let answer = components[1].trimmingCharacters(in: .whitespacesAndNewlines)
-                    breakdown.append(ProductInfo(category: category, answer: answer))
-                }
-            }
-            return breakdown
-        }
+             aiResponse = "Error: Could not parse JSON. Check the console for details."
+         }
+     }
+ }
+ /*
+     func extractJSON(from text: String) -> String? {
+        let regexPattern = "\\{(?:[^{}]|\\n|(?R))*\\}"  // Supports nested braces and newlines
 
-     private func extractSection(from text: String, title: String) -> String {
-            let pattern = "\(title)\\n(.*?)\\n\\n" // Matches the section including the title
-            let regex = try? NSRegularExpression(pattern: pattern, options: [.dotMatchesLineSeparators])
-            let range = regex?.firstMatch(in: text, options: [], range: NSRange(text.startIndex..., in: text))?.range(at: 1) // Capture group 1
+         guard let range = text.range(of: regexPattern, options: .regularExpression) else {
+             print("❌ No JSON found")
+             return nil
+         }
 
-            if let range = range, let swiftRange = Range(range, in: text) {
-                return String(text[swiftRange]).trimmingCharacters(in: .whitespacesAndNewlines)
-            }
+         var jsonString = String(text[range]).trimmingCharacters(in: .whitespacesAndNewlines)
+         
+         // ✅ Fix invalid percentage formatting: Convert "80%" to "80.0"
+         jsonString = jsonString.replacingOccurrences(of: "(\\d+)%", with: "$1.0", options: .regularExpression)
+         
+         // ✅ Replace invalid "N/A" occurrences with null (optional, based on requirements)
+         jsonString = jsonString.replacingOccurrences(of: "\"N/A\"", with: "null")
 
-            return "" // Return empty string if section not found
-        }
+         // Debugging: Print extracted and cleaned JSON
+         print("✅ Cleaned JSON: \n\(jsonString)")
+         
+         // Validate extracted JSON
+         guard let data = jsonString.data(using: .utf8) else {
+             print("❌ Unable to convert JSON string to Data")
+             return nil
+         }
+         
+         do {
+             let _ = try JSONSerialization.jsonObject(with: data, options: [])
+             return jsonString
+         } catch {
+             print("❌ Extracted JSON is invalid: \(error.localizedDescription)")
+             return nil
+         }
+     }
+  */
+  }
 
-    // Function to Extract Specific Information
-    private func extractValue(from text: String, for regexPattern: String) -> String {
-        let regex = try? NSRegularExpression(pattern: regexPattern, options: .caseInsensitive)
-        let range = regex?.firstMatch(in: text, options: [], range: NSRange(text.startIndex..., in: text))?.range(at: 1)
+ struct AIAnalysisView: View {
+     let aiData: AIAnalysisResponse
 
-        if let range = range, let swiftRange = Range(range, in: text) {
-            return String(text[swiftRange]).trimmingCharacters(in: .whitespacesAndNewlines)
-        }
-
-        return "Unknown"
-    }
-
-    // Search Online for Brand & Product Information
-    private func searchBrandInformation(brandName: String) {
-        Task {
-            let searchResults = await fetchWebData(for: "Is \(brandName) a Canadian brand?")
-            DispatchQueue.main.async {
-                isCanadianBrand = searchResults
-            }
-        }
+     var body: some View {
+         VStack(alignment: .leading, spacing: 10) {
+             Spacer()
+             // Quick Verdict with Icon
+             HeaderView(title: "Product Evaluation:", iconName: verdictIcon(for: aiData.quickVerdict), color: verdictColor(for: aiData.quickVerdict))
+             
+             Text(aiData.quickVerdict)
+                 .font(.body)
+                 .padding(.horizontal, 35)
+             // Canadian Probability
+           
+             HeaderView(title: "Canadian Probability:")
+             Spacer()
+             Text(aiData.canadianProbability)
+                 .font(.title2) // Or .title3, .headline, .system(size:weight:design), etc.
+                 .foregroundColor(.red)
+                 .padding(.horizontal, 35)
+             // Canadian Probability Visualization
+           
+              CanadaFlagView(probability: aiData.canadianProbability)
+                 .frame(width: UIScreen.main.bounds.width, height: 125)
+           
+             // Product Breakdown Table
+             HeaderView(title: "Product Breakdown:")
         
-        Task {
-            let searchResults = await fetchWebData(for: "Is \(productName) made in Canada?")
-            DispatchQueue.main.async {
-                isProductMadeInCanada = searchResults
-            }
-        }
-        
-        Task {
-            let searchResults = await fetchWebData(for: "\(productName) ingredient origins")
-            DispatchQueue.main.async {
-                ingredientOrigins = searchResults
-            }
-        }
-        
-        Task {
-            let searchResults = await fetchWebData(for: "\(brandName) company history")
-            DispatchQueue.main.async {
-                companyHistory = searchResults
-            }
-        }
-        
-        Task {
-            let searchResults = await fetchWebData(for: "\(brandName) brand history")
-            DispatchQueue.main.async {
-                brandHistory = searchResults
-            }
-        }
-    }
-}
-// Reusable Section View
-struct SectionView: View {
-    let title: String
-    let content: String
+             BreakdownTable(breakdown: aiData.detailedBreakdown)
+             
+             // Country Contributions
+             HeaderView(title: "Country Contributions:")
+             
+             ForEach(aiData.detailedBreakdown.countryContributions.sorted(by: { $0.value > $1.value }), id: \.key) { country, percentage in
+                 HStack {
+                     Text(country)
+                         .font(.body)
+                     Spacer()
+                     Text("\(percentage, specifier: "%.1f")%")
+                         .font(.body)
+                         .foregroundColor(.gray)
+                 }
+                 .padding(.horizontal, 35)
+             }
+             //////////////aurora temp////////////
+           
+             // Alternative Products Section
+             if let alternatives = aiData.alternativeCompanies, !alternatives.isEmpty {
+                 AlternativeProductsView(alternatives: alternatives)
+             }
+             //////////////aurora temp end////////////
+         }
+         .padding(.bottom, 10)
+     }
+ }
+ struct BreakdownTable: View {
+     let breakdown: DetailedBreakdown
+     var body: some View {
+         VStack {
+             HStack {
+                 Text("Category").bold().frame(maxWidth: .infinity, alignment: .leading)
+                 Text("Analysis").bold().frame(maxWidth: .infinity, alignment: .leading)
+             }
+             .padding()
+             .background(Color.gray.opacity(0.3))
+             .cornerRadius(8)
+             
+             BreakdownRow(category: "Ingredients", answer: breakdown.ingredients.isCanadian)
+             BreakdownRow(category: "Manufacturing", answer: breakdown.manufacturing.isCanadian)
+             BreakdownRow(category: "Parent Company", answer: breakdown.parentCompany.isCanadian)
+             BreakdownRow(category: "Brand", answer: breakdown.brand.isCanadian)
+         }
+         .padding(.horizontal, 35)
+     }
+ }
+ struct AlternativeProductsView: View {
+     let alternatives: [AlternativeCompany]
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(title)
-                .font(.title3).bold()
-            Text(content)
-                .font(.body)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(8)
-        }
-        .padding(.horizontal)
-    }
-}
-private func parseParentCompany(_ text: String) -> [ParentCompany] {
-       var companies: [ParentCompany] = []
-       let lines = text.components(separatedBy: .newlines)
+     var body: some View {
+         VStack(alignment: .leading, spacing: 10) {
+             HeaderView(title: "Alternative Products:")
+             LazyVStack(spacing: 10) {
+                 ForEach(alternatives, id: \.name) { alternative in
+                     AlternativeProductRow(alternative: alternative)
+                 }
+             }
+             .padding(.horizontal, 35)
+         }
+     }
+ }
 
-       for line in lines {
-           let components = line.components(separatedBy: " ")
-           if components.count >= 3 { // Ensure at least 3 components (Category, Name, Country)
-               let category = components[0].trimmingCharacters(in: .whitespacesAndNewlines)
-               let name = components[1].trimmingCharacters(in: .whitespacesAndNewlines)
-               let country = components[2].trimmingCharacters(in: .whitespacesAndNewlines)
-               companies.append(ParentCompany(category: category, name: name, country: country))
-           }
-       }
-       return companies
-   }
+ struct AlternativeProductRow: View {
+     let alternative: AlternativeCompany
 
-// Data Structures (same as before)
-struct ProductInfo: Identifiable {
-    let id = UUID()
-    let category: String
-    let answer: String
-}
+     var body: some View {
+         HStack {
+             Text(alternative.name)
+                 .font(.body)
+                 .bold()
+             
+             Spacer()
+             
+             Text(alternative.website)
+                 .font(.body)
+         }
+         .padding(.vertical, 5)
+         .padding(.horizontal, 15)
+         .background(Color.gray.opacity(0.2))
+         .cornerRadius(8)
+     }
+ }
 
-struct ParentCompany: Identifiable {
-    let id = UUID()
-    let category: String
-    let name: String
-    let country: String
-}
-struct WebView: UIViewRepresentable {
-    let url: URL
+ struct HeaderView: View {
+     let title: String
+     var iconName: String? = nil
+     var color: Color = .black
 
-    func makeUIView(context: Context) -> WKWebView {
-        let webView = WKWebView()
-        let request = URLRequest(url: url)
-        webView.load(request)
-        return webView
-    }
+     var body: some View {
+         HStack {
+             if let iconName = iconName {
+                 Image(systemName: iconName)
+                     .resizable()
+                     .scaledToFit()
+                     .frame(width: 25, height: 25)
+                     .foregroundColor(color)
+             }
+             Text(title)
+                 .font(.title)
+                 .foregroundColor(.black)
+         }
+         .padding(.horizontal, 35)
+     }
+ }
 
-    func updateUIView(_ uiView: WKWebView, context: Context) { }
-}
+ // MARK: - Table Row Component
+ struct BreakdownRow: View {
+     let category: String
+     let answer: String
+     
+     var body: some View {
+         HStack {
+             Text(category)
+                 .frame(maxWidth: .infinity, alignment: .leading)
+             
+             HStack {
+                 Image(systemName: answerIcon(for: answer)) // ✅ Adds appropriate icon
+                     .resizable()
+                     .scaledToFit()
+                     .frame(width: 20, height: 20)
+                     .foregroundColor(answerColor(for: answer))
+                 
+                 Text(answer)
+                     .frame(maxWidth: .infinity, alignment: .leading)
+                     .foregroundColor(answerColor(for: answer))
+             }
+         }
+         .padding()
+         .background(Color.gray.opacity(0.1))
+         .cornerRadius(8)
+     }
+ }
+ // MARK: - Flag View
+ struct CanadaFlagView: View {
+     var probability: String
 
-func fetchWebData(for query: String) async -> String {
-    let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-    let searchURL = URL(string: "https://www.google.com/search?q=\(encodedQuery)")! // Force-unwrap is okay here
+     var imageName: String {
+         switch probability {
+         case "Not Made in Canada":
+             return "4flag"
+         case "May Not Be Canada Made":
+             return "4flag"
+         case "Possibly Canada Made":
+             return "4flag"
+         default:
+             return "4flagwhite"
+         }
+     }
+     var body: some View {
+                Image(imageName)
+                 .resizable()
+                 .aspectRatio(contentMode: .fit) // Ensures correct proportions
+                 .frame(width: UIScreen.main.bounds.width * 0.8, height: 150)
+     }
+ }
 
-    // Instead of returning a string, create a WebView to display the search
-    return "" // Return an empty string as a placeholder
-}
+ // MARK: - Helper Functions for Icons and Colors
+ func verdictIcon(for verdict: String) -> String {
+     if verdict.lowercased().contains("canadian") {
+         return "flag.fill"
+     } else if verdict.lowercased().contains("not canadian") {
+         return "xmark.circle.fill"
+     } else {
+         return "lightbulb.fill"
+     }
+ }
+
+ func verdictColor(for verdict: String) -> Color {
+     if verdict.lowercased().contains("canadian") {
+         return .red
+     } else if verdict.lowercased().contains("not canadian") {
+         return .gray
+     } else {
+         return .yellow
+     }
+ }
+
+ func answerIcon(for answer: String) -> String {
+     switch answer.lowercased() {
+     case "yes":
+         return "checkmark.circle.fill" // ✅ Green check
+     case "no":
+         return "xmark.circle.fill" // ❌ Red cross
+     case "maybe", "unknown":
+         return "questionmark.circle.fill" // ❓ Yellow question mark
+     default:
+         return "exclamationmark.circle.fill" // ⚠️ Generic alert
+     }
+ }
+
+ func answerColor(for answer: String) -> Color {
+     switch answer.lowercased() {
+     case "yes":
+         return .green
+     case "no":
+         return .red
+     case "maybe", "unknown":
+         return .yellow
+     default:
+         return .black
+     }
+ }
+ // ✅ Root Response Struct
+ struct AIAnalysisResponse: Codable {
+     let quickVerdict: String
+     let productSummary: String
+     let parentCompany: ParentCompany
+     let canadianProbability: String
+     let detailedBreakdown: DetailedBreakdown
+     let alternativeCompanies: [AlternativeCompany]?  // ✅ Optional array
+ }
+
+ // ✅ Parent Company Struct
+ struct ParentCompany: Codable {
+     let name: String
+     let isCanadian: String
+ }
+
+ // ✅ Detailed Breakdown
+ struct DetailedBreakdown: Codable {
+     let ingredients: IngredientInfo
+     let manufacturing: ManufacturingInfo
+     let parentCompany: ParentCompanyInfo
+     let brand: BrandInfo
+     let countryContributions: [String: Double] // ✅ Matches JSON
+     let supplyChainDetails: [String]
+ }
+
+ // ✅ Nested Breakdown Categories
+ struct IngredientInfo: Codable {
+     let isCanadian: String
+     let source: String
+ }
+
+ struct ManufacturingInfo: Codable {
+     let isCanadian: String
+     let location: String
+ }
+
+ struct ParentCompanyInfo: Codable {
+     let isCanadian: String
+     let name: String
+ }
+
+ struct BrandInfo: Codable {
+     let isCanadian: String
+     let name: String
+ }
+
+ // ✅ Alternative Company Struct
+ struct AlternativeCompany: Codable {
+     let name: String
+     let website: String
+ }
+ struct ProductCategoryTableView: Codable {
+     let categories: [ProductCategory]
+ }
+
+ struct ProductCategory: Codable {
+     let name: String
+     let percentage: Double
+ }
+
+
+
 
 */

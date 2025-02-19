@@ -23,6 +23,7 @@ struct productCountryApp: App {
         
         WindowGroup {
             AnimatedScanPage()
+                .preferredColorScheme(.light) 
             //ContentView()
             //CameraPreviewView()
         }

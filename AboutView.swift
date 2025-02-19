@@ -55,7 +55,7 @@ struct AboutView: View {
             /*Aurora'S
              BannerAdView(adUnitID: "ca-app-pub-8031803597671655/4570916389")*/
             /*test id: ca-app-pub-3940256099942544/2435281174*/
-            BannerAdView(adUnitID: "ca-app-pub-8031803597671655/4570916389")
+            BannerAdView(adUnitID: "ca-app-pub-8031803597671655/4570916382")
                  .frame(width: UIScreen.main.bounds.size.width, height: 50) // Set height for banner
             .navigationTitle("") // Set navigation title
         }

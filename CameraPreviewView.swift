@@ -64,12 +64,12 @@ struct CameraPreviewView: View {
                 /*Aurora'S
                  BannerAdView(adUnitID: "ca-app-pub-8031803597671655/4570916389")*/
                 /*test id: ca-app-pub-3940256099942544/2435281174*/
-                BannerAdView(adUnitID: "ca-app-pub-8031803597671655/4570916389")
+                BannerAdView(adUnitID: "ca-app-pub-8031803597671655/4570916382")
                     .frame(width: UIScreen.main.bounds.size.width, height: 50) // Set height for banner
             }.background(
                 NavigationLink(
-                    destination: capturedPhoto.map { TextScannerView(image: $0)},
-                        //TextScannerViewByClaude(image: $0)},
+                    destination: capturedPhoto.map { //TextScannerView(image: $0)},
+                        TextScannerViewByVisionAPI(image: $0)},
                     isActive: Binding(
                         get: { capturedPhoto != nil },
                         //get: $navigateToTextScanner, // Use the new navigation state
@@ -80,6 +80,7 @@ struct CameraPreviewView: View {
             ).onAppear {
                 // ✅ Reset capturedPhoto when coming back from TextScannerView
                 //capturedPhoto = nil
+         
                 cameraManager.setupCamera()
             }
             .onChange(of: selectedPhoto) { newItem in

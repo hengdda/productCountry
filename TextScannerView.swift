@@ -145,8 +145,6 @@ struct TextScannerView: View {
                 }.frame(width: UIScreen.main.bounds.width * 0.9)
               .padding()
                        }
-      
-      
         .navigationBarHidden(true) // Hides the "< Back" button
         .onChange(of: aiResponse) { newResponse in
             if !newResponse.isEmpty {
@@ -210,40 +208,6 @@ struct TextScannerView: View {
                 canadianAlternatives = response.extractValue(between: #"(QUESTION5)"#, and: nil)
     }
 
-/*
-    private func fetchAIAnalysis(for text: String) {
-        Task {
-            do {
-                let prompt = """
-                Analyze this product label:
-                (QUESTION1) Was this product made by a Canadian company?
-                (QUESTION2) Is the brand owned by a Canadian company?
-                (QUESTION3) Are the ingredients, manufacturing process, parent company, and brand all Canadian-owned?
-                (QUESTION4) Who is the parent company, and is it based in Canada?
-                (QUESTION5) Are there any Canadian alternatives to this product?
-
-                Text: \(text)
-                """
-
-                let response = try await model.generateContent(prompt)
-                let responseText = response.text ?? "No response from AI."
-
-                DispatchQueue.main.async {
-                    aiResponse = responseText // ✅ Ensure AI response updates first
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // ✅ Small delay to allow SwiftUI updates
-                        extractValues() // ✅ Extract values AFTER aiResponse updates
-                        showAIAlert = true
-                    }
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    aiResponse = "Error: \(error.localizedDescription)"
-                    showAIAlert = true
-                }
-            }
-        }
-    }
-*/
     private func fetchAIAnalysis(for text: String) {
         Task {
             do {
@@ -266,12 +230,11 @@ struct TextScannerView: View {
                         (QUESTION4) [Your Answer Here]
                         (QUESTION5) [Your Answer Here]
                         Below are questions: 
-                        (QUESTION1) Was this product made by a Canadian company?
-                        (QUESTION2) Is the brand owned by a Canadian company?
-                        (QUESTION3) Are the ingredients, manufacturing process, parent company, and brand all Canadian-owned?
+                        (QUESTION1) What is the product name and was this product made by a Canadian company?
+                        (QUESTION2) What is the brand name and is the brand owned by a Canadian company?
+                        (QUESTION3) "What are the ingredients, manufacturing process, and parent company, are they all Canadian-owned?"
                         (QUESTION4) Who is the parent company, and is it based in Canada?
-                        (QUESTION5) Are there any Canadian alternatives to this product?
-
+                        (QUESTION5) What is the brand's category? Within this category, what are the most popular products made in canada?
                         Text: \(text)
                         """
                         
